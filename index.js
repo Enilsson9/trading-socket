@@ -36,60 +36,6 @@ setInterval(function () {
 
 
 
-const mongo = require('mongodb').MongoClient;
-// Start up socket.io
- //const ios = require('socket.io')(server);
-// Connect to mongo
-//mongo.connect('mongodb://localhost:27017/chat', function(err, db){
-mongo.connect('mongodb://127.0.0.1/newgraph', function(err, db){
-  if(err){
-      throw err;
-  }
-
-  console.log('MongoDB connected...');
-
-  io.on('connection', function(socket) {
-      //console.log(socket.id)
-      let graph = db.collection('newgraph');
-      //console.log(chat);
-
-      // Get chats from mongo collection
-      graph.find().limit(100).sort({_id:1}).toArray(function(err, res){
-        if(err){
-            throw err;
-        }
-        // Emit the messages
-        socket.emit('MESSAGES', res);
-      });
-
-      socket.on('SEND_MESSAGE', function(data) {
-        let gasoline = data.gasoline;
-        //let message = data.message;
-
-        //console.log(data);
-
-        graph.insert({gasoline: gasoline}, function(){
-            io.emit('MESSAGES', data)
-        });
-      });
-  });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-http.listen(3000, function() {
-   console.log('listening on *:3000');
+http.listen(5000, function() {
+   console.log('listening on *:5000');
 });
