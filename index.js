@@ -12,9 +12,9 @@ var princessTarta = {
 
 var cakes = [princessTarta];
 
-app.get('/', function(req, res) {
+/*app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
-});
+});*/
 
 io.on('connection', function(socket) {
     console.log('a user connected');
